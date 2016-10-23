@@ -18,6 +18,9 @@ class AnagramsSuite extends FunSuite  {
     assert(wordOccurrences("Robert") === List(('b', 1), ('e', 1), ('o', 1), ('r', 2), ('t', 1)))
   }
 
+  test("sentenceOccurrences: Roberto Carlos") {
+    assert(sentenceOccurrences("Roberto Carlos".split(" ").toList) === List(('a', 1), ('b', 1), ('c', 1), ('e', 1), ('l', 1), ('o', 3), ('r', 3), ('s', 1), ('t', 1)))
+  }
 
   test("sentenceOccurrences: abcd e") {
     assert(sentenceOccurrences(List("abcd", "e")) === List(('a', 1), ('b', 1), ('c', 1), ('d', 1), ('e', 1)))
@@ -37,13 +40,21 @@ class AnagramsSuite extends FunSuite  {
     assert(wordAnagrams("player").toSet === Set("parley", "pearly", "player", "replay"))
   }
 
-
+  test("combinations for trivial case works") {
+    val l = List(('a',2))
+    assert(combinations(l) == List(List(), List(('a', 1)), List(('a', 2))))
+  }
 
   test("subtract: lard - r") {
     val lard = List(('a', 1), ('d', 1), ('l', 1), ('r', 1))
     val r = List(('r', 1))
     val lad = List(('a', 1), ('d', 1), ('l', 1))
     assert(subtract(lard, r) === lad)
+  }
+
+  test("subtract: ok - ok") {
+    val ok = wordOccurrences("ok")
+    assert(subtract(ok, ok) == List())
   }
 
 
